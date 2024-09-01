@@ -1,0 +1,50 @@
+# required options
+name: "CheckMK"
+description: "Run a CheckMK instance in your Homeassistant"
+version: 1.0.29
+slug: "checkmk"
+init: false
+arch:
+  - amd64
+# optional config
+url: "https://github.com/eporly/tosm-hassio-addon-checkmk"
+webui: "http://[HOST]:[PORT:8083]"
+watchdog: "http://[HOST]:[PORT:8083]"
+ports:
+  22/tcp: 22033
+  6556/tcp: 6556
+  6557/tcp: 6557
+  5000/tcp: 8083
+  162/udp: 162
+  514/udp: 514
+  514/tcp: 514
+ports_description:
+  22/tcp: "SSH"
+  6556/tcp: "CheckMK Agent"
+  6557/tcp: "CheckMK Livestatus"
+  5000/tcp: "CheckMK WebUI"
+  162/udp: "SNMP Traps"
+  514/tcp: "Syslog TCP"
+  514/udp: "Syslog UDP"
+tmpfs: true
+stage: "experimental"
+startup: application
+homeassistant: 2024.1.1
+#image: checkmk/check-mk-raw:2.2.0-latest
+ingress: true
+ingress_port: 8083
+ingress_entry: "/cmk"
+ingress_stream: true
+environment:
+  CMK_TMPFS: "on"
+  CMK_SITE_ID: CMK_SITE_ID
+  CMK_PASSWORD: CMK_PASSWORD
+  CMK_LIVESTATUS_TCP: CMK_LIVESTATUS_TCP
+# options/schema  
+options:
+  CMK_SITE_ID: "cmk"
+  CMK_PASSWORD: "secret"
+schema:
+  CMK_SITE_ID: str
+  CMK_PASSWORD: password
+  CMK_LIVESTATUS_TCP: list(off|on)?
