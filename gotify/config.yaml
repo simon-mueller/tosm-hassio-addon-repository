@@ -1,0 +1,27 @@
+# required options
+name: "Gotify"
+description: "a simple server for sending and receiving messages written in go"
+version: latest
+slug: "gotify"
+init: false
+arch:
+  - amd64
+boot: "auto"
+# optional config
+url: "https://github.com/simon-mueller/tosm-hassio-addon-repository/tree/master/gotify"
+ports:
+  80/tcp: 8089
+ports_description:
+  80/tcp: "webui"
+stage: "stable"
+startup: application
+homeassistant: 2024.1.1
+image: docker.io/gotify/server
+# options/schema  
+schema:
+  TZ: str?
+map:
+  - type: addon_config
+    path: /app/data
+    read_only: false
+  - ssl:ro
