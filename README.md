@@ -11,4 +11,5 @@ This repository features the following addons:
 
 ### [Home Assistant Addon: CheckMK](./checkmk)
 
+### [Home Assistant Addon: Gotify](./gotify)
 
